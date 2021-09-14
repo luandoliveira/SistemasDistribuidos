@@ -2,17 +2,19 @@ import time
 import socket
 import threading
 
+
+#DEFININDO SERVIDOR
 ip_server = socket.gethostbyname(socket.gethostname())
 port = 8080
 encoding_format = 'utf-8'
 
-#Create socket
+#Criando socket
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((ip_server,port))
 
 connections, messages = [], []
 
-#Handle message
+#Mensagens
 def handle_clientes(conn, addr):
     print(f"[INFO] New user are connected with ip address: {addr}")
     global connections,messages
@@ -38,7 +40,7 @@ def handle_clientes(conn, addr):
                 messages.append(message)
                 send_message_all_users()
 
-#Send message for individual user
+#Enviar mensagem individual
 def send_individual_user(connection):
     print(f"[INFO] Sending message for {connection['addr']}")
     for i in range(connection['last'], len(messages)):
@@ -47,7 +49,7 @@ def send_individual_user(connection):
         connection['last'] = i + 1
         time.sleep(0.2)
 
-#Send message for all users
+#Enivar mensagem para todos
 def send_message_all_users():
     global connections
     for connection in connections:
