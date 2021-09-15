@@ -49,7 +49,7 @@ def send_individual_user(connection):
         connection['last'] = i + 1
         time.sleep(0.2)
 
-#Enivar mensagem para todos
+#Enviar mensagem para todos
 def send_message_all_users():
     global connections
     for connection in connections:
